@@ -14,14 +14,17 @@ public class GameData {
 
 	private GameData() {
 		// sectionData in the format of spawnWaveWaitTime : direction (L, R, Rnd) : level
-		sectionData = new string[7];
-		sectionData [0] = "5:R:0, 5:R:0, 4:R:0";
-		sectionData [1] = "5:L:0, 5:R:1, 3:L:0, 3:R:1";
-		sectionData [2] = "5:L:1, 3:R:2, 2:L:2, 2:L:2";
-		sectionData [3] = "4:R:2, 2:R:2, 2:L:4, 2:R:2, 1:L:4";
-		sectionData [4] = "3:L:4, 2:R:5, 2:R:4, 0:L:5";
-		sectionData [5] = "2:L:5";
-		sectionData [6] = "";
+		sectionData = new string[10];
+		sectionData [0] = "6:R:0, 8:R:0, 7:R:0";
+		sectionData [1] = "0:L:0, 5:R:1, 3:L:1, 5:R:2";
+		sectionData [2] = "0:L:1, 3:R:2, 2:L:2, 2:L:2, 3:R:3";
+		sectionData [3] = "1:R:2, 2:R:2, 2:L:4, 2:R:2, 1:L:4, 2:L:4, 2:R:4";
+		sectionData [4] = "0:L:4, 2:R:5, 0:R:4, 0:L:5, 1:L:6, 0:R:5, 0:L:6";
+		sectionData [5] = "4:L2:4,1:L:4"; //"6:L2:4, 10:R2:4, 12:L2:4, 11:L2:4, 12:R2:4";
+		sectionData [6] = "1:L:4";
+		sectionData [7] = "1:L2:4,1:L:5";
+		sectionData [8] = "1:R2:4";
+		sectionData [9] = "1:L2:4";
 		//sectionData [5] = "2:L:5, 1:R:5, 1:L:6, 0:R:5";
 		//sectionData [6] = "2:L:6, 2:R:6, 2:L:6";
 
@@ -93,8 +96,12 @@ public class GameData {
 	}
 
 	public void getNextSection() {
-		sectionIndex++;
-		nextWaveData();
+		if (sectionIndex < sectionData.Length - 1) {
+			sectionIndex++;
+		}
+		Debug.Log ("---->Get Next Section " + sectionIndex);
+		nextWaveData ();
+
 	}
 
 	public int getSectionIndex() {

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/TransformingRobot/Scenes/demo.unity
+- path: Assets/Extreme Sci-Fi LITE/Demo_Scenes/Display_1.unity
   isLoaded: 1
   isActive: 1

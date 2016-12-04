@@ -25,7 +25,7 @@ public class AutoPathingEnemyShip : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log ("Enemy::Start");
+		//Debug.Log ("Enemy::Start");
 		playerShip = GameObject.Find ("PlayerShip");
 		thisShip = this.gameObject;
 		inRange = false;
@@ -92,27 +92,38 @@ public class AutoPathingEnemyShip : MonoBehaviour {
 	void generateWaypoints() {
 		Vector3 shipPosition = playerShip.transform.position;
 		int direction = Random.Range (-1, 2);
+		string directionString;
 
 		//print ("Direction " + direction);
 		string waveDataString = GameData.Instance.getCurrentWaveData ();
 		//Debug.Log ("WaveDataString " + waveDataString);
 
 		string[] waveData = waveDataString.Split(':');
-	
-		if (waveData [1] == "R") {
+
+		directionString = waveData [1];
+
+		if (directionString == "R" || directionString == "R2") {
 			direction = -1;
-		} else if (waveData [1] == "L") {
+		} else if (directionString == "L" || directionString == "L2") {
 			direction = 1;
 		}
+
 		level = int.Parse (waveData [2]);
 
 		//print ("Wave Data String " + waveDataString + " dir " + direction);
 
 		waypoints = new Vector3[4];
-		waypoints [0] = new Vector3 (shipPosition.x + 600, shipPosition.y + 200, shipPosition.z + direction*200);
-		waypoints [1] = new Vector3 (shipPosition.x + 400, shipPosition.y + 50, shipPosition.z + Random.Range(-3,3)*10 );
-		waypoints [2] = new Vector3 (shipPosition.x + 100, shipPosition.y + 30 + Random.Range(-5,5), shipPosition.z + Random.Range(-3,3)*10 );
-		waypoints [3] = new Vector3 (shipPosition.x - 50, shipPosition.y + 200, shipPosition.z + direction*200);
+		if (directionString == "R" || directionString == "L") {
+			waypoints [0] = new Vector3 (shipPosition.x + 600, shipPosition.y + 200, shipPosition.z + direction * 200);
+			waypoints [1] = new Vector3 (shipPosition.x + 400, shipPosition.y + 50, shipPosition.z + Random.Range (-3, 3) * 10);
+			waypoints [2] = new Vector3 (shipPosition.x + 100, shipPosition.y + 30 + Random.Range (-5, 5), shipPosition.z + Random.Range (-3, 3) * 10);
+			waypoints [3] = new Vector3 (shipPosition.x - 50, shipPosition.y + 200, shipPosition.z + direction * 200);
+		} else {
+			waypoints [0] = new Vector3 (shipPosition.x + 200, shipPosition.y + 200, shipPosition.z + direction * 500);
+			waypoints [1] = new Vector3 (shipPosition.x + 75, shipPosition.y + 50, shipPosition.z + direction * 250);
+			waypoints [2] = new Vector3 (shipPosition.x + 25, shipPosition.y + 50, shipPosition.z - direction * 250);
+			waypoints [3] = new Vector3 (shipPosition.x - 200, shipPosition.y + 200, shipPosition.z - direction * 500);
+		}
 		WPindexPointer = 1;
 
 			transform.position = waypoints [0];

@@ -37,7 +37,7 @@ public class GameControllerCanyonGame : MonoBehaviour {
 
 	void startSpawn()
 	{
-		Debug.Log ("START SPAWN");
+		//Debug.Log ("START SPAWN");
 		StartCoroutine (SpawnWaves ());
 	}
 
@@ -97,6 +97,7 @@ public class GameControllerCanyonGame : MonoBehaviour {
 		// check if more data
 
 		if (GameData.Instance.getCurrentWaveData () != "") {
+			Debug.Log ("NEXT SECTION Wave Data: " + GameData.Instance.getCurrentWaveData ());
 			startSpawn ();
 		}
 	}

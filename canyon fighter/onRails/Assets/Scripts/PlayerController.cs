@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject[] sectionMarkers;
 	public float rotationDamping;
 	public float speed;
+	public float speed2;
 	public GameObject explosion;
 	public int lastSection;
 	public int damage = 2;
@@ -66,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 				approachWaypoint ();
 			}
 			if (state == "phase2") {
-				decelerate (0.9f);
+				//decelerate (0.9f);
 				approachWaypoint ();
 			}
 
@@ -105,6 +106,12 @@ public class PlayerController : MonoBehaviour {
 				// end
 				Debug.Log("LAST SECTION");
 				state = "phase2";
+				WPindexPointer = 5; //loop
+				reachedNextWaypoint = false;
+			}
+			if (WPindexPointer == 6) {
+				state = "phase2";
+				speed = speed2;
 			}
 		} else if (reachedNextWaypoint == true) {
 			//print("exiting waypoint " + WPindexPointer);
